@@ -24,11 +24,13 @@ import android.widget.ListView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
-    private String[] drawerItems;
+    private ArrayList<String> drawerItems;
     private DrawerLayout drawerLayout;
     private ListView drawerList;
-    ArrayAdapter<String> aa;
+    CustomAdapter aa;
     String currentTitle;
     ActionBar ab;
     Intent i;
@@ -40,11 +42,15 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         drawerList = findViewById(R.id.left_drawer);
 
-        drawerItems = new String[] { "Bio", "Vaccination", "Anniversary", "About Us" };
+        drawerItems = new ArrayList<>();
+        drawerItems.add("Bio" );
+        drawerItems.add("Vaccination");
+        drawerItems.add("Anniversary");
+        drawerItems.add("About Us");
         ab = getSupportActionBar();
 
-        aa = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_activated_1, drawerItems);
+        aa = new CustomAdapter(this,
+                R.layout.item_list, drawerItems);
         drawerList.setAdapter(aa);
 
 
@@ -75,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                   // Highlight the selected item,
                   //  update the title, and close the drawer
                   drawerList.setItemChecked(position, true);
-                  currentTitle = drawerItems[position];
+                  currentTitle = drawerItems.get(position);
                   ab.setTitle(currentTitle);
                   drawerLayout.closeDrawer(drawerList);
               }

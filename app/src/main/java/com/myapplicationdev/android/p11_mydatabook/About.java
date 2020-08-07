@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 public class About extends AppCompatActivity {
@@ -18,7 +19,9 @@ public class About extends AppCompatActivity {
         ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         iv = findViewById(R.id.imageView);
-        Picasso.get().load("https://upload.wikimedia.org/wikipedia/commons/8/80/Republic_Polytechnic_Logo.jpg").error(R.drawable.error).into(iv);
+        Glide.with(getApplicationContext())
+                .load("https://upload.wikimedia.org/wikipedia/commons/8/80/Republic_Polytechnic_Logo.jpg").placeholder(R.drawable.ajax_loader).error(R.drawable.error)
+                .into(iv);
 
 
     }
